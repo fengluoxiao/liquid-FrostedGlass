@@ -1,8 +1,8 @@
-# Liquid Frosted Glass (液态磨砂玻璃)
+# Liquid Frosted Glass Vue(液态磨砂玻璃 Vue版本)
 
 这是一个基于 [archisvaze/liquid-glass](https://github.com/archisvaze/liquid-glass) 项目（灵感来源于 iOS 26 Liquid Glass 效果）的进一步演进。
 
-**Liquid Frosted Glass** 在原有的液态玻璃效果基础上，专注于实现更细腻、更自然的**液态磨砂玻璃**质感和交互体验。
+**Liquid Frosted Glass Vue** 在原有的液态玻璃效果基础上，专注于实现更细腻、更自然的**液态磨砂玻璃**质感和交互体验。
 
 ## 主要特性：
 
