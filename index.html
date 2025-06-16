@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Frosted Glass Vue Component</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url(https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfDB8fGVufDB8fHx8fA%3D%3D) center / cover no-repeat;
+            font-family: sans-serif;
+            font-weight: 300;
+            overflow: hidden; /* Prevent scrolling if container is 100vh */
+        }
+        #app {
+            height: 100%; /* Ensure #app takes full height of body */
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    </div>
+
+    <!-- SVG filter definition for glass distortion (global) -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <filter id="glass-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.000" numOctaves="5" stitchTiles="stitch" result="f1" />
+            <feDiffuseLighting in="f1" lighting-color="white" surfaceScale="77" result="f2">
+                <feDistantLight azimuth="235" elevation="60" />
+            </feDiffuseLighting>
+            <feBlend in="SourceGraphic" in2="f2" mode="multiply" />
+        </filter>
+        <!-- Water balloon effect filter -->
+        <filter id="water-balloon-effect">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.1" numOctaves="5" seed="0" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html> 

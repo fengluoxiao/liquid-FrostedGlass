@@ -1,27 +1,78 @@
-# Liquid Frosted Glass Vue(液态磨砂玻璃 Vue版本)
+# liquid-FrostedGlass
 
-这是一个基于 [archisvaze/liquid-glass](https://github.com/archisvaze/liquid-glass) 项目（灵感来源于 iOS 26 Liquid Glass 效果）的进一步演进。
+此模板旨在帮助您开始使用 Vite 进行 Vue 3 开发。
 
-**Liquid Frosted Glass Vue** 在原有的液态玻璃效果基础上，专注于实现更细腻、更自然的**液态磨砂玻璃**质感和交互体验。
+## 推荐的 IDE 设置
 
-## 主要特性：
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (并禁用 Vetur)。
 
-*   **优化动画平滑度**：调整了切换动画的缓动函数，使其更接近 iOS 系统级别的流畅与克制。
-*   **HDR 亮度变化**：在点击 Tab 导航时，整个玻璃容器的背景亮度会发生平滑变化，模拟 HDR 效果。
-*   **液态形变动画**：Tab 切换时，滑块背景会呈现独特的"冲水气球"般形变与恢复动画，增强液态感。
-*   **沉浸式交互**：支持长按并滑动选择 Tab，带来更直观、响应式的触控体验。
-*   **可定制的磨砂效果**：保留并优化了对玻璃磨砂、阴影、染色等参数的实时调整能力。
+## 自定义配置
 
-## 灵感来源：
+请参阅 [Vite 配置参考](https://vite.dev/config/)。
 
-该项目深度借鉴了 Apple 即将推出的 iOS 26 中的 Liquid Glass 设计理念，并在此基础上进行了创意性的拓展与优化。特别感谢 [archisvaze/liquid-glass](https://github.com/archisvaze/liquid-glass) 提供的基础框架和灵感。
+## 项目设置
 
-## 使用方法：
+```sh
+npm install
+```
 
-1.  在浏览器中打开 `glass.html` 文件。
-2.  通过点击或长按滑动 Tab 导航，体验 Liquid Frosted Glass 的动态效果。
+### 开发模式编译与热重载
 
-## 浏览器兼容性：
+```sh
+npm run dev
+```
 
-*   **推荐使用**：Chrome (macOS/Windows)
-*   **注意**：`backdrop-filter` 和 SVG 滤镜的支持在不同浏览器中可能有所差异。 
+### 生产模式编译与压缩
+
+```sh
+npm run build
+```
+
+## 使用方式
+
+`LiquidFrostedGlass` 组件通过 `tabsData` 和 `views` 两个属性来渲染标签页和对应的内容视图。
+
+您只需在您的 Vue 组件中传递这两个属性即可：
+
+```vue
+<template>
+  <LiquidFrostedGlass :tabsData="myTabsData" :views="myViews" />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import LiquidFrostedGlass from './components/LiquidFrostedGlass.vue';
+// 引入所有需要的视图组件，例如：
+import HomeView from './views/HomeView.vue';
+import FindView from './views/FindView.vue';
+// ... 其他视图组件
+
+// 定义 myTabsData 和 myViews 数组
+// 具体结构请参考下面的 "属性 (Props)" 章节。
+const myTabsData = ref([
+  {
+    name: '标签页名称', // 标签页显示的名称
+    iconType: 'svg' || 'img' || 'icon', // 图标类型
+    iconContent: 'SVG代码 或 未选中图片URL 或 字体图标类名', // 图标内容
+    iconSelectedContent: '选中图片URL' // (可选) 仅当 iconType 为 'img' 时使用
+  },
+  // ... 更多标签页数据项
+]);
+const myViews = ref([
+  HomeView,
+  FindView,
+  // MeView,
+  // AboutView,
+  // ... 更多视图组件
+]);
+</script>
+```
+
+### 属性 (Props)
+
+- **`tabsData`**: (Array, 必填) 标签页的数据数组。每个对象应包含:
+    - `name`: (String) 标签页显示的名称。
+    - `iconType`: (String) 图标类型，可以是 `'svg'` (使用 SVG 代码), `'img'` (使用图片 URL), 或 `'icon'` (使用字体图标类名)。
+    - `iconContent`: (String) 图标内容。如果是 `'svg'`，则是 SVG 字符串；如果是 `'img'`，则是未选中状态的图片 URL；如果是 `'icon'`，则是字体图标的类名。
+    - `iconSelectedContent`: (String, 可选) 仅当 `iconType` 为 `'img'` 时使用，表示选中状态的图片 URL。
+- **`views`**: (Array, 必填) 与 `tabsData` 顺序对应的组件数组。每个组件将作为标签页的内容视图被渲染。
